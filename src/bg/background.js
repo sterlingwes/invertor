@@ -68,6 +68,7 @@ function getHost (url) {
 }
 
 function apply () {
+  setIcon('dark')
   chrome.tabs.executeScript({
     allFrames: true,
     file: 'src/inject/add.js'
@@ -75,10 +76,19 @@ function apply () {
 }
 
 function undo () {
+  setIcon('light')
   chrome.tabs.executeScript({
     allFrames: true,
     file: 'src/inject/remove.js'
   })
+}
+
+function setIcon (type) {
+  if (!type) type = 'light'
+  var title = 'invertor - invert page'
+  var titleAction = type === 'light' ? ' (enable)' : ' (disable)'
+  chrome.browserAction.setIcon({ path: 'icons/icon_' + type + '32.png' })
+  chrome.browserAction.setTitle({ title: title + titleAction })
 }
 
 chrome.tabs.onUpdated.addListener(
