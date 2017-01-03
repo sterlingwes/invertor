@@ -1,6 +1,6 @@
 {
   "name": "Invertor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version": 2,
   "description": "Inverts a website's colours",
   "homepage_url": "https://github.com/sterlingwes/invertor",
@@ -20,6 +20,7 @@
     "persistent": false
   },
   "permissions": [
-    "<all_urls>"
+    "<all_urls>",
+    "tabs"
   ]
 }
