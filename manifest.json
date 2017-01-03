@@ -13,14 +13,19 @@
     "default_icon": "icons/icon_dark32.png",
     "default_title": "invertor - invert page"
   },
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  },
   "background": {
     "scripts": [
-      "src/bg/background.js"
+      "src/background.js"
     ],
     "persistent": false
   },
   "permissions": [
     "<all_urls>",
-    "tabs"
+    "tabs",
+    "storage"
   ]
 }

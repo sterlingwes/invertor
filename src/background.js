@@ -28,7 +28,7 @@ function enableSite (host) {
 
 function disableSite (host) {
   localStorage.removeItem(host)
-  delete sites[host]
+  sites[host] = false
 }
 
 function add (host) {
@@ -93,13 +93,19 @@ function setIcon (type) {
 
 chrome.tabs.onUpdated.addListener(
   function (tabId, evt, tab) {
-    if (evt.status && evt.status === 'complete' && tab.active) {
-      if (!tab.url) return console.warn('no url')
-      var host = getHost(tab.url)
-      console.log('host', host, sites[host])
-      if (sites[host]) apply()
-      else undo()
-    }
+    chrome.storage.sync.get({
+      defaultOn: false
+    }, function (opts) {
+      if (evt.status && evt.status === 'complete' && tab.active) {
+        if (!tab.url) return console.warn('no url')
+        var host = getHost(tab.url)
+        if (/^chrome:/.test(host)) return
+        console.log('host', host, sites[host])
+        if (sites[host]) apply()
+        else if (typeof sites[host] !== 'boolean' && opts.defaultOn) apply()
+        else undo()
+      }
+    })
   }
 )
 
