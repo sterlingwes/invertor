@@ -6,9 +6,9 @@ function saveOptions () {
   }, function () {
     // Update status to let user know options were saved.
     var status = document.getElementById('status')
-    status.textContent = 'Options saved.'
+    status.style.opacity = 1
     setTimeout(function () {
-      status.textContent = ''
+      status.style.opacity = 0
     }, 750)
   })
 }
